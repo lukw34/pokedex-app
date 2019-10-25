@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import {PokemonList, PokemonResponseData} from "../types/pokemon";
+
 import {fetchListOfPokemons} from "../../pokeapi";
-import PokemonGridList from "../PokemonGridList";
+import GridList from "../GridList";
+import PokemonItem from "../PokemonItem";
 
 interface PokedexState {
     data: PokemonList,
@@ -26,7 +28,7 @@ const Pokedex: React.FC = () => {
     };
 
     return (
-        <PokemonGridList {...pokedexData} loadMore={loadMore}/>
+        <GridList Item={PokemonItem} {...pokedexData} loadMore={loadMore}/>
     );
 };
 

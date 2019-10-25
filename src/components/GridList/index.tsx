@@ -7,12 +7,12 @@ import { PokemonGridListStyled, PokemonGridListItem} from './styled'
 
 interface GridListProps {
     data: PokemonList,
-    renderItem?: (data: Pokemon) => React.Component,
+    Item: React.FC<Pokemon>,
     loadMore: Function,
     hasMore: boolean
 }
 
-const PokemonGridList: React.FC<GridListProps> = ({loadMore, hasMore,  data, renderItem}) => {
+const GridList: React.FC<GridListProps> = ({loadMore, hasMore,  data, Item }) => {
     return (
         <InfiniteScroll
             pageStart={0}
@@ -22,9 +22,9 @@ const PokemonGridList: React.FC<GridListProps> = ({loadMore, hasMore,  data, ren
             loader={<div className="loader" key={0}>Loading ...</div>}
         >
             <PokemonGridListStyled>
-            {data.map(({ name }) => (
-                <PokemonGridListItem key={name}>
-                    {name}
+            {data.map(data => (
+                <PokemonGridListItem key={data.name}>
+                    <Item {...data} />
                 </PokemonGridListItem>
             ))}
             </PokemonGridListStyled>
@@ -32,4 +32,4 @@ const PokemonGridList: React.FC<GridListProps> = ({loadMore, hasMore,  data, ren
     );
 };
 
-export default PokemonGridList;
+export default GridList;
