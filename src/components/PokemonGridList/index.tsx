@@ -3,6 +3,8 @@ import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import {PokemonList, Pokemon} from "../types/pokemon";
 
+import { PokemonGridListStyled, PokemonGridListItem} from './styled'
+
 interface GridListProps {
     data: PokemonList,
     renderItem?: (data: Pokemon) => React.Component,
@@ -16,14 +18,16 @@ const PokemonGridList: React.FC<GridListProps> = ({loadMore, hasMore,  data, ren
             pageStart={0}
             loadMore={loadMore}
             hasMore={hasMore}
+            useWindow={false}
+            loader={<div className="loader" key={0}>Loading ...</div>}
         >
-            <div>
+            <PokemonGridListStyled>
             {data.map(({ name }) => (
-                <div>
+                <PokemonGridListItem key={name}>
                     {name}
-                </div>
+                </PokemonGridListItem>
             ))}
-            </div>
+            </PokemonGridListStyled>
         </InfiniteScroll>
     );
 };

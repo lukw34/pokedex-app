@@ -17,7 +17,6 @@ const Pokedex: React.FC = () => {
     });
 
     const loadMore = async () => {
-        console.log('duuuupa')
         const {next, results}: PokemonResponseData = await fetchListOfPokemons(pokedexData.next);
         setPokedexData({
             hasMore: Boolean(next),
