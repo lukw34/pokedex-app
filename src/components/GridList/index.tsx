@@ -1,7 +1,7 @@
 import React from 'react';
 // @ts-ignore
 import InfiniteScroll from 'react-infinite-scroller';
-import {PokemonList, Pokemon} from "../types/pokemon";
+import {PokemonList, Pokemon} from "../../types/pokemon";
 
 import { PokemonGridListStyled, PokemonGridListItem} from './styled'
 

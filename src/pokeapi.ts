@@ -1,4 +1,4 @@
-import {PokemonResponseData} from "./components/types/pokemon";
+import {PokemonResponseData} from "./types/pokemon";
 
 const getUrl = (endpoint: string) :string => `https://pokeapi.co/api/v2/${endpoint}`;
 
