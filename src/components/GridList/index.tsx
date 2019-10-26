@@ -10,14 +10,14 @@ interface  GridListItem  {
     details: PokemonDetails
 }
 
-interface GridListItemComp extends GridListItem {
+interface PokemonGridListItemComp extends PokemonDetails{
     isData: boolean,
     itemNumber: number
 }
 
 interface GridListProps {
     data: Array<GridListItem>,
-    Item: React.FC<GridListItemComp>,
+    Item: React.FC<PokemonGridListItemComp>,
     loadMore: Function,
     hasMore: boolean
 }
@@ -28,13 +28,14 @@ const GridList: React.FC<GridListProps> = ({loadMore, hasMore,  data, Item }) =>
             pageStart={0}
             loadMore={loadMore}
             hasMore={hasMore}
+            threshold={750}
             useWindow={false}
             loader={<div className="loader" key={0}>Loading ...</div>}
         >
             <PokemonGridListStyled>
-            {data.map((data, index) => (
-                <PokemonGridListItem key={data.name}>
-                    <Item itemNumber={index + 1} isData={data.details !== null} {...data} details={data.details || {}} />
+            {data.map(({ details, ...props}, index) => (
+                <PokemonGridListItem key={props.name}>
+                    <Item itemNumber={index + 1} isData={details !== null} {...props} {...(details || {})}  />
                 </PokemonGridListItem>
             ))}
             </PokemonGridListStyled>

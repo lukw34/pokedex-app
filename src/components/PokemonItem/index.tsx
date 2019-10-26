@@ -13,26 +13,18 @@ import {
     PokemonExperienceStyled
 } from './styled';
 
-const PokemonItem: React.FC<{
+interface PokemonItemProps extends PokemonDetails {
     name: string,
-    details: PokemonDetails,
     isData: boolean,
     itemNumber: number
-}> = ({
-          name, itemNumber, details: {
-        weight,
-        height,
-        baseExperience,
-        image,
-        types = [],
-        stats = []
-    }, isData
-      }) => (
+}
+
+const PokemonItem: React.FC<PokemonItemProps> = ({name, itemNumber, weight, height, baseExperience, image, stats = [], types = [], isData}) => (
     <PokemonItemContainer>
         <PokemonItemName>{name}</PokemonItemName>
         <PokemonItemNoData isData={isData}>#{itemNumber}</PokemonItemNoData>
         <PokemonItemData>
-            <PokemonImage src={image} />
+            <PokemonImage src={image}/>
             <PokemonTypes id={name} types={types}/>
             <PokemonDataStyled>
                 <PokemonDataItemStyled title="Weight">{weight}</PokemonDataItemStyled>
@@ -45,4 +37,4 @@ const PokemonItem: React.FC<{
 );
 
 
-export default PokemonItem;
+export default React.memo(PokemonItem);

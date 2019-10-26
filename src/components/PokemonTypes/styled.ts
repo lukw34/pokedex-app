@@ -9,17 +9,22 @@ const typeColors: {
     fire: 'orange',
     water: 'blue',
     normal: 'grey',
-    ghost: '#de586f',
+    fairy: 'lightcoral',
     psychic: 'red',
-    dragon: '',
+    dragon: 'dodgerblue',
+    fighting: 'brown',
     bug: '#28de00',
-    flying: '#272e69',
+    ghost: '#272e69',
     electric: '#d0d007',
     ground: '#d06e00',
-    rock: 'darkgrey'
-};
+    rock: 'darkgrey',
+    flying: '#325569',
+    ice: 'darkturquoise',
+    dark: 'black',
+    steel: '#4a4d59'
+}
 
-export const PokemonTypesContainer = styled.div`
+    export const PokemonTypesContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
