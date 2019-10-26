@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import GridList from "../GridList";
+import GridList from "../../components/GridList";
 import {selectPokemonListData} from "../../selectors/pokedex.selector";
 import {loadMore} from "../../actions/pokedex.actions";
-import PokemonItem from "../PokemonItem";
+import PokemonItem from "../../components/PokemonItem";
 
 const Pokedex: React.FC = () => {
     const dispatch = useDispatch();
