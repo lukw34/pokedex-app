@@ -1,6 +1,5 @@
 import {PokedexState} from "./type";
-import {ADD_POKEMON_TO_LIST, PokedexActionTypes} from "../actions/types";
-
+import {ADD_POKEMON_TO_LIST, PokedexActionTypes, SET_DETAILS} from "../actions/types";
 
 const initialState: PokedexState = {
     list: [],
@@ -20,6 +19,15 @@ export default (
                 next: action.next,
                 list: [...state.list, ...action.data],
                 hasMore: action.hasMore
+            }
+        }
+        case SET_DETAILS: {
+            return {
+                ...state,
+                detailsById: {
+                    ...state.detailsById,
+                    [action.id]: action.data
+                }
             }
         }
         default:

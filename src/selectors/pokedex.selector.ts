@@ -7,7 +7,16 @@ const getPokedexState = (store: {
 
 export const selectPokemonList = createSelector(
     getPokedexState,
-    ({ list, hasMore }) => ({
+    ({ list, hasMore, detailsById }) => list.map(({ name }) => ({
+        name,
+        details: detailsById[name] || null
+    }))
+);
+
+export const selectPokemonListData = createSelector(
+    getPokedexState,
+    selectPokemonList,
+    ({ hasMore }, list) => ({
         list,
         hasMore
     })

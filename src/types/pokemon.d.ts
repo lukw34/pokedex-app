@@ -19,12 +19,12 @@ export interface PokemonStat {
 }
 
 type PokemonStats = Array<PokemonStat>
-type PokemonType = Array<String>
+type PokemonType = Array<string>
 
-export interface PokemonDetails extends Pokemon {
-    id: number,
+export interface PokemonDetails {
     name: string,
     weight: number,
+    height: number,
     image: string,
     types: PokemonType,
     stats: PokemonStats

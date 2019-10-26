@@ -39,7 +39,5 @@ export const PokemonItemNoData = styled(PokemonItemContent)<{ isData?: boolean }
 `;
 
 export const PokemonItemData = styled(PokemonItemContent)`
-    background: green;
-    position: absolute;
     z-index: 10;
 `;
