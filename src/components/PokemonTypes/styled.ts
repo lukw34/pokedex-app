@@ -7,7 +7,16 @@ const typeColors: {
     grass: 'green',
     poison: 'purple',
     fire: 'orange',
-    water: 'blue'
+    water: 'blue',
+    normal: 'grey',
+    ghost: '#de586f',
+    psychic: 'red',
+    dragon: '',
+    bug: '#28de00',
+    flying: '#272e69',
+    electric: '#d0d007',
+    ground: '#d06e00',
+    rock: 'darkgrey'
 };
 
 export const PokemonTypesContainer = styled.div`
@@ -23,5 +32,6 @@ export const PokemonTypeStyled = styled.div<{ type: string }>`
     border-radius: 2px 6px;
     margin: 5px;
     color: white;
+    font-weight: bold;
     background: ${props => typeColors[props.type]};
 `;
