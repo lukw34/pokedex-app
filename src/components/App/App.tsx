@@ -2,6 +2,8 @@ import React from 'react';
 import { Switch, Route, Redirect }  from 'react-router-dom';
 
 import Pokedex from "../../screens/Pokedex";
+import PokemonSearch from '../../screens/PokemonSearch';
+
 import {
     AppStyledBackground,
     AppStyled,
@@ -24,7 +26,7 @@ const App: React.FC = () => {
                         <Pokedex />
                     </Route>
                     <Route title="Pokemon Search" exact path="/pokemon/search">
-                        asdasdasd
+                        <PokemonSearch />
                     </Route>
                     <Redirect to="/pokemon" from="*" />
                 </Switch>

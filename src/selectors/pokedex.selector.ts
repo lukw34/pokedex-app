@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import {PokedexState} from "../reducers/type";
+import {AppState} from "../store";
 
 const getPokedexState = (store: {
     pokedex: PokedexState
@@ -25,4 +26,10 @@ export const selectPokemonListData = createSelector(
 export const selectNextUrl = createSelector(
     getPokedexState,
     ({ next }) => next || 'https://pokeapi.co/api/v2/pokemon'
+);
+
+export const makeSelectPokemon = () => createSelector(
+    getPokedexState,
+    (_: AppState, name: string) => name,
+    ({ detailsById }, name) => detailsById[name]
 );

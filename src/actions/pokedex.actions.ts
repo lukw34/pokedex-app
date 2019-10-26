@@ -5,7 +5,7 @@ import {PokemonDetails, PokemonList, PokemonResponseData} from "../types/pokemon
 import { selectNextUrl } from '../selectors/pokedex.selector';
 import {AppState} from "../store";
 import {Action} from "redux";
-import {fetchListOfPokemons, fetchPokemonDetails} from "../pokeapi";
+import {fetchListOfPokemons, fetchPokemonDetails, getUrl} from "../pokeapi";
 
 
 export const addPokemonToList = (newPokemonList: PokemonList, hasMore: boolean, next?: string) : PokedexActionTypes => ({
@@ -30,3 +30,13 @@ export const loadMore = (): ThunkAction<void, AppState, null, Action<string>> =>
         dispatch(setPokemonDetails(data, name));
     });
 };
+
+export const getPokemonDetails = (name: string): ThunkAction<void, AppState, null, Action<string>> => async (dispatch, getState: () => AppState) => {
+    const { pokedex: { detailsById }} = getState();
+    const pokemon = detailsById[name] || null;
+    console.log(pokemon);
+    if(pokemon === null) {
+        const data = await(fetchPokemonDetails(getUrl(`pokemon/${name}`)));
+        dispatch(setPokemonDetails(data, name))
+    }
+}

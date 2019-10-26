@@ -1,6 +1,6 @@
 import {PokemonDetails, PokemonResponseData} from "./types/pokemon";
 
-const getUrl = (endpoint: string): string => `https://pokeapi.co/api/v2/${endpoint}`;
+export const getUrl = (endpoint: string): string => `https://pokeapi.co/api/v2/${endpoint}`;
 
 const fetchWrap = async <T>(request: Promise<any>): Promise<T> => {
     try {
