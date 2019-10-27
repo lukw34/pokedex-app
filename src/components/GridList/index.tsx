@@ -34,7 +34,7 @@ const GridList: React.FC<GridListProps> = ({loadMore, hasMore,  data, Item }) =>
         >
             <PokemonGridListStyled>
             {data.map(({ details, ...props}, index) => (
-                <GridListItem key={props.name}>
+                <GridListItem key={`${props.name}-${index + 1}`}>
                     <Item itemNumber={index + 1} isData={details !== null} {...props} {...(details || {})}  />
                 </GridListItem>
             ))}
