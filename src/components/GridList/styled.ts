@@ -8,7 +8,7 @@ export const PokemonGridListStyled = styled.div`
     justify-content: center;
 `;
 
-export const PokemonGridListItem = styled.div`
+export const GridListItem = styled.div`
     height: 350px;
     margin: 15px;
     min-width: 250px;

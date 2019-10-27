@@ -3,7 +3,7 @@ import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import {PokemonDetails} from "../../types/pokemon";
 
-import { PokemonGridListStyled, PokemonGridListItem} from './styled'
+import { PokemonGridListStyled, GridListItem} from './styled'
 
 interface  GridListItem  {
     name: string,
@@ -34,9 +34,9 @@ const GridList: React.FC<GridListProps> = ({loadMore, hasMore,  data, Item }) =>
         >
             <PokemonGridListStyled>
             {data.map(({ details, ...props}, index) => (
-                <PokemonGridListItem key={props.name}>
+                <GridListItem key={props.name}>
                     <Item itemNumber={index + 1} isData={details !== null} {...props} {...(details || {})}  />
-                </PokemonGridListItem>
+                </GridListItem>
             ))}
             </PokemonGridListStyled>
         </InfiniteScroll>
