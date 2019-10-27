@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PokemonSearch /> should render pokemon item if pokemon exist 1`] = `
+<styled.div>
+  <styled.div>
+    <styled.input
+      onChange={[Function]}
+      value=""
+    />
+    <styled.button
+      onClick={[Function]}
+    >
+      Search
+    </styled.button>
+  </styled.div>
+  <styled.div>
+    <PokemonItemContainer
+      name=""
+    />
+  </styled.div>
+</styled.div>
+`;
+
+exports[`<PokemonSearch /> should render pokemon item if pokemon exist 2`] = `
+<styled.div>
+  <styled.div>
+    charmander
+  </styled.div>
+  <Styled(styled.div)
+    isData={true}
+  >
+    #
+    1
+  </Styled(styled.div)>
+  <Styled(styled.div)>
+    <styled.img
+      src="image"
+    />
+    <PokemonTypesComp
+      id="charmander"
+      types={
+        Array [
+          "fire",
+        ]
+      }
+    />
+    <styled.div>
+      <styled.div
+        title="Weight"
+      >
+        64
+      </styled.div>
+      <styled.div>
+        20
+      </styled.div>
+      <styled.div
+        title="Height"
+      >
+        45
+      </styled.div>
+    </styled.div>
+    <PokemonStatsComp
+      id="charmander"
+      stats={Array []}
+    />
+  </Styled(styled.div)>
+</styled.div>
+`;
+
+exports[`<PokemonSearch /> should render render empty pokemon item on init 1`] = `
+<styled.div>
+  <styled.div>
+    <styled.input
+      onChange={[Function]}
+      value=""
+    />
+    <styled.button
+      onClick={[Function]}
+    >
+      Search
+    </styled.button>
+  </styled.div>
+  <styled.div>
+    <PokemonItemContainer
+      name=""
+    />
+  </styled.div>
+</styled.div>
+`;
