@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Redirect }  from 'react-router-dom';
+import { Routes, Route, Navigate }  from 'react-router-dom';
 
 import Pokedex from "../../screens/Pokedex";
 import PokemonSearch from '../../screens/PokemonSearch';
@@ -21,15 +21,11 @@ const App: React.FC = () => {
             <AppHeader/>
             <AppStyledBackground />
             <AppStyledContent>
-                <Switch>
-                    <Route exact  path="/pokemon">
-                        <Pokedex />
-                    </Route>
-                    <Route title="Pokemon Search" exact path="/pokemon/search">
-                        <PokemonSearch />
-                    </Route>
-                    <Redirect to="/pokemon" from="*" />
-                </Switch>
+                <Routes>
+                    <Route element={<Pokedex />}  path="/pokemon" />
+                    <Route element={<PokemonSearch />} path="/pokemon/search" />
+                    <Route element={<Navigate to={"/pokemon"}/>} path="*" />
+                </Routes>
             </AppStyledContent>
         </AppStyled>
     );
