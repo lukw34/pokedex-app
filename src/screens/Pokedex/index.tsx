@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import GridList from "../../components/GridList";
 import {selectPokemonListData} from "../../selectors/pokedex.selector";
-import {loadMore} from "../../actions/pokedex.actions";
+import {loadMore} from "../../async-actions/pokedex.actions";
 import PokemonItem from "../../components/PokemonItem";
 
 const Pokedex: React.FC = () => {

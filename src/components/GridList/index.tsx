@@ -5,7 +5,7 @@ import {PokemonDetails} from "../../types/pokemon";
 
 import { PokemonGridListStyled, GridListItem} from './styled'
 
-interface  GridListItem  {
+interface  GridListItemInterface  {
     name: string,
     details: PokemonDetails
 }
@@ -16,7 +16,7 @@ interface PokemonGridListItemComp extends PokemonDetails{
 }
 
 interface GridListProps {
-    data: Array<GridListItem>,
+    data: Array<GridListItemInterface>,
     Item: React.FC<PokemonGridListItemComp>,
     loadMore: Function,
     hasMore: boolean

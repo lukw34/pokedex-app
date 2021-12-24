@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { PokemonInput, PokemonInputContainer, PokemonSearchButton, PokemonSearchContainer, PokemonSearchPokemonItem } from './styled';
 import PokemonItemContainer from "../../components/PokemonItemContainer";
-import {getPokemonDetails} from "../../actions/pokedex.actions";
+import {getPokemonDetails} from "../../async-actions/pokedex.actions";
 
 const Pokedex: React.FC = () => {
     const dispatch = useDispatch();

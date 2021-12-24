@@ -1,6 +1,6 @@
-import { createSelector } from 'reselect';
-import {PokedexState} from "../reducers/type";
+import { createSelector } from '@reduxjs/toolkit';
 import {AppState} from "../store";
+import { Pokemon } from '../types/pokemon';
 
 const getPokedexState = (store: {
     pokedex: PokedexState
@@ -8,7 +8,7 @@ const getPokedexState = (store: {
 
 export const selectPokemonList = createSelector(
     getPokedexState,
-    ({ list, hasMore, detailsById }) => list.map(({ name }) => ({
+    ({ list, detailsById }) => list.map(({ name }: Pokemon) => ({
         name,
         details: detailsById[name] || null
     }))
