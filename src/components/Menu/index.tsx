@@ -1,13 +1,13 @@
 import React from "react";
-import {useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import pokemonIcon from '../../assets/pokemon-icon.jpg';
 import searchIcon from '../../assets/search-icon.png';
 
-import {MenuContainer, MenuItemLink, MenuIconStyled, MenuItemLinkContainer} from './styled';
+import { MenuContainer, MenuItemLink, MenuIconStyled, MenuItemLinkContainer } from './styled';
 
 const Menu = () => {
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
     return (
         <MenuContainer>
             <MenuItemLinkContainer isActiveItem={pathname === '/pokemon'}>
@@ -21,7 +21,7 @@ const Menu = () => {
                 </MenuItemLink>
             </MenuItemLinkContainer>
         </MenuContainer>
-    )
+    );
 };
 
 export default Menu;

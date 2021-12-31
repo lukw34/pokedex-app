@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate }  from 'react-router-dom';
 
-import Pokedex from "../../screens/Pokedex";
+import Pokedex from "../../screens/PokedexScreen";
 import PokemonSearch from '../../screens/PokemonSearch';
 
 import {

@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import {AppState} from "../store";
+import { AppState } from "../store";
 import { Pokemon } from '../types/pokemon';
 
 const getPokedexState = (store: {

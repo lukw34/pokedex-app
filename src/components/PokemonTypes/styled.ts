@@ -22,7 +22,7 @@ const typeColors: {
     ice: 'darkturquoise',
     dark: 'black',
     steel: '#4a4d59'
-}
+};
 
     export const PokemonTypesContainer = styled.div`
     display: flex;

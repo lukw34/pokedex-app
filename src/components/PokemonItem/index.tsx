@@ -1,5 +1,5 @@
 import React from 'react';
-import {PokemonDetails} from "../../types/pokemon";
+import { PokemonDetails } from "../../types/pokemon";
 import PokemonTypes from "../PokemonTypes";
 import PokemonStatsComp from "../PokemonStats";
 import {
@@ -19,7 +19,7 @@ interface PokemonItemProps extends PokemonDetails {
     itemNumber: number
 }
 
-const PokemonItem: React.FC<PokemonItemProps> = ({name, itemNumber, weight, height, baseExperience, image, stats = [], types = [], isData}) => (
+const PokemonItem: React.FC<PokemonItemProps> = ({ name, itemNumber, weight, height, baseExperience, image, stats = [], types = [], isData }) => (
     <PokemonItemContainer>
         <PokemonItemName>{name}</PokemonItemName>
         <PokemonItemNoData isData={isData}>#{itemNumber}</PokemonItemNoData>

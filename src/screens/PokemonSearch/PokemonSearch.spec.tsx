@@ -46,7 +46,7 @@ describe('<PokemonSearch />', () => {
     it('handle input and trigger action on search click', () => {
         const dispatch = jest.fn();
         mockedReactRedux.useDispatch.mockReturnValueOnce(dispatch);
-        const event = {target: { value: "1" }};
+        const event = { target: { value: "1" } };
         const comp = shallow(<PokemoonSearch />);
         comp.find(PokemonInput).simulate('change', event);
         comp.find(PokemonSearchButton).simulate('click');

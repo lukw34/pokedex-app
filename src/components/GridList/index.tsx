@@ -1,9 +1,9 @@
 import React from 'react';
 // @ts-ignore
 import InfiniteScroll from 'react-infinite-scroller';
-import {PokemonDetails} from "../../types/pokemon";
+import { PokemonDetails } from "../../types/pokemon";
 
-import { PokemonGridListStyled, GridListItem} from './styled'
+import { PokemonGridListStyled, GridListItem } from './styled';
 
 interface  GridListItemInterface  {
     name: string,
@@ -22,7 +22,7 @@ interface GridListProps {
     hasMore: boolean
 }
 
-const GridList: React.FC<GridListProps> = ({loadMore, hasMore,  data, Item }) => {
+const GridList: React.FC<GridListProps> = ({ loadMore, hasMore,  data, Item }) => {
     return (
         <InfiniteScroll
             pageStart={0}
@@ -33,7 +33,7 @@ const GridList: React.FC<GridListProps> = ({loadMore, hasMore,  data, Item }) =>
             loader={<div className="loader" key={0}>Loading ...</div>}
         >
             <PokemonGridListStyled>
-            {data.map(({ details, ...props}, index) => (
+            {data.map(({ details, ...props }, index) => (
                 <GridListItem key={`${props.name}-${index + 1}`}>
                     <Item itemNumber={index + 1} isData={details !== null} {...props} {...(details || {})}  />
                 </GridListItem>

@@ -1,4 +1,4 @@
-import {PokemonDetails, PokemonResponseData} from "./types/pokemon";
+import { PokemonDetails, PokemonResponseData } from "./types/pokemon";
 
 export const getUrl = (endpoint: string): string => `https://pokeapi.co/api/v2/${endpoint}`;
 
@@ -21,7 +21,7 @@ export const fetchPokemonDetails = async (pokemonUrl: string): Promise<PokemonDe
     const {
         height,
         weight,
-        species: {name},
+        species: { name },
         sprites: {
             front_default: image
         },
@@ -48,4 +48,4 @@ export const fetchPokemonDetails = async (pokemonUrl: string): Promise<PokemonDe
             name
         }))
     };
-}
+};

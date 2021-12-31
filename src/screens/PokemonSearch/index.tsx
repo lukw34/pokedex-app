@@ -1,9 +1,9 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { PokemonInput, PokemonInputContainer, PokemonSearchButton, PokemonSearchContainer, PokemonSearchPokemonItem } from './styled';
 import PokemonItemContainer from "../../components/PokemonItemContainer";
-import {getPokemonDetails} from "../../async-actions/pokedex.actions";
+import { getPokemonDetails } from "../../slices/pokedex.slice";
 
 const Pokedex: React.FC = () => {
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const Pokedex: React.FC = () => {
         <PokemonSearchContainer>
             <PokemonInputContainer>
                 <PokemonInput value={inputName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setInput(e.target.value)
+                    setInput(e.target.value);
                 }}/>
                 <PokemonSearchButton onClick={searchClick}>
                     Search
