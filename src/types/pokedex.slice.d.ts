@@ -1,8 +1,3 @@
-interface PokedexState {
-    next?: string,
-    hasMore: boolean,
-    list: PokemonList,
-    detailsById: {
-        [key: string]: PokemonDetails
-    }
-}
+import { EntityState } from '@reduxjs/toolkit';
+
+export interface PokedexState extends EntityState<PokemonDetails> {}

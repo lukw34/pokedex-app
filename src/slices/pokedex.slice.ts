@@ -1,55 +1,44 @@
-import { Action,  createSlice, PayloadAction, ThunkAction, } from "@reduxjs/toolkit";
-import { fetchListOfPokemons, fetchPokemonDetails, getUrl } from "../pokeapi";
-import { selectNextUrl } from "../selectors/pokedex.selector";
-import { AppState, AppDispatch } from "../store";
-import { PokemonResponseData } from "../types/pokemon";
+import { Action, createEntityAdapter, createSlice, ThunkAction, } from '@reduxjs/toolkit';
+import { fetchListOfPokemons, fetchPokemonDetails } from '../pokeapi';
+import { AppState, AppDispatch } from '../store';
+import { PokemonDetails, PokemonResponseData } from '../types/pokemon';
 
-const initialState: PokedexState = {
-    list: [],
-    detailsById: {},
-    next: '',
-    hasMore: true
-};
+const pokedexAdapter = createEntityAdapter<PokemonDetails>({
+    selectId: ({ name }) => name
+});
 
 const pokedexSlice = createSlice({
     name: 'pokedex',
-    initialState,
+    initialState: pokedexAdapter.getInitialState(),
     reducers:  {
-        addPokemonToList: (state: PokedexState, action: PayloadAction<AddPokemonToListAction>) => {
-            state.next = action.payload.next;
-            state.list = [...state.list, ...action.payload.data];
-            state.hasMore = action.payload.hasMore;
+        addPokemonToList: (state, action) => {
+            pokedexAdapter.addMany(state, action.payload);
         },
-        setPokemonDetails:  (state: PokedexState, action: PayloadAction<SetPokemonDetailsAction>) => {
-            state.detailsById = {
-                ...state.detailsById,
-                [action.payload.id]: action.payload.data
-            };
+        setPokemonDetails: (state, action) => {
+            pokedexAdapter.upsertOne(state, action.payload);
         }
     }
 });
 
 
-export const loadMore = (): ThunkAction<void, AppState, null, Action<string>> => async (dispatch: AppDispatch, getState) => {
-    const nextUrl = selectNextUrl(getState());
-    const { next, results }: PokemonResponseData = await fetchListOfPokemons(nextUrl);
-    dispatch(addPokemonToList({ data: results, hasMore: Boolean(next), next }));
-    results.map(async ({ url, name }) => {
-        const data = await(fetchPokemonDetails(url));
-        dispatch(setPokemonDetails({ data, id: name }));
-    });
+export const fetchPokemonListChunk = (pokemonUrl: string): ThunkAction<Promise<{ next: string, hasMore: boolean}>, AppState, null, Action<string>> => 
+    async (dispatch: AppDispatch) => {
+        const { next, results }: PokemonResponseData = await fetchListOfPokemons(pokemonUrl);
+        dispatch(addPokemonToList(results));
+        //TODO
+        return {
+            next,
+            hasMore: Boolean(next)
+        };
 };
 
-export const getPokemonDetails = (name: string): ThunkAction<void, AppState, null, Action<string>> => async (dispatch, getState: () => AppState) => {
-    const { pokedex: { detailsById } } = getState();
-    const pokemon = detailsById[name] || null;
-    console.log(pokemon);
-    if(pokemon === null) {
-        const data = await(fetchPokemonDetails(getUrl(`pokemon/${name}`)));
-        dispatch(setPokemonDetails({ data, id: name }));
-    }
+export const fetchSinglePokemon = (pokemonUrl: string): ThunkAction<void, AppState, null, Action<string>> => async (dispatch) => {
+    const pokemon: PokemonDetails = await fetchPokemonDetails(pokemonUrl);
+    dispatch(setPokemonDetails(pokemon));
 };
 
 export const { addPokemonToList, setPokemonDetails } = pokedexSlice.actions;
+
+export const { selectIds: selectPokemonList, selectById: selectPokemonDetails } = pokedexAdapter.getSelectors((state: AppState) => state.pokedex);
 
 export default pokedexSlice.reducer;

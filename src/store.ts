@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import pokedex from './slices/pokedex.slice';
+import { PokedexState } from './types/pokedex.slice';
 
 
 export type AppState = {

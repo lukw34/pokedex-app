@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 
-import { PokemonInput, PokemonInputContainer, PokemonSearchButton, PokemonSearchContainer, PokemonSearchPokemonItem } from './styled';
-import PokemonItemContainer from "../../components/PokemonItemContainer";
-import { getPokemonDetails } from "../../slices/pokedex.slice";
+import { PokemonInput, PokemonInputContainer, PokemonSearchButton, PokemonSearchContainer } from './styled';
 
 const Pokedex: React.FC = () => {
-    const dispatch = useDispatch();
     const [inputName, setInput] = useState<string>('');
     const searchClick = () => {
-        dispatch(getPokemonDetails(inputName));
     };
 
     return (
@@ -22,9 +17,6 @@ const Pokedex: React.FC = () => {
                     Search
                 </PokemonSearchButton>
             </PokemonInputContainer>
-            <PokemonSearchPokemonItem>
-                <PokemonItemContainer name={inputName}/>
-            </PokemonSearchPokemonItem>
         </PokemonSearchContainer>
     );
 };

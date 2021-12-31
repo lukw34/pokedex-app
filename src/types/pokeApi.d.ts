@@ -10,6 +10,8 @@ interface PokeApiPokemonListResponse {
     results: PokeApiPokemon[]
 }
 
+
+//TODO
 interface PokeApiPokemonDetails {
 
 }

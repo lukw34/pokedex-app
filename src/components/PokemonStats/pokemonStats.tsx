@@ -1,5 +1,5 @@
-import React from "react";
-import { PokemonStats } from "../../types/pokemon";
+import React from 'react';
+import { PokemonStats } from '../../types/pokemon';
 
 import {
     PokemonStatsContainer,

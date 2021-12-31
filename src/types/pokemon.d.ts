@@ -1,14 +1,9 @@
-export interface Pokemon {
-    name: string,
-    url: string
-}
-
-type PokemonList = Array<Pokemon>;
+type PokemonList = Array<PokemonDetails>;
 
 export interface PokemonResponseData {
     count: number,
     previous?: string,
-    next?: string,
+    next: string,
     results: PokemonList
 }
 
@@ -23,10 +18,16 @@ type PokemonType = Array<string>
 
 export interface PokemonDetails {
     name: string,
-    weight: number,
-    height: number,
-    image: string,
-    types: PokemonType,
-    stats: PokemonStats
-    baseExperience: number
+    url: string | null,
+    weight?: number,
+    height?: number,
+    image?: string,
+    types?: PokemonType,
+    stats?: PokemonStats
+    baseExperience?: number
+}
+
+export interface PokemonListItem {
+    name: string,
+    url: string | url
 }
