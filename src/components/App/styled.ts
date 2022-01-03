@@ -5,6 +5,13 @@ export const GlobalStyled = createGlobalStyle`
     body {
         overflow: hidden;
     }
+
+    @font-face {
+	    font-family: 'Pokemon GB';
+	    src: url('https://cdn.rawgit.com/Superpencil/pokemon-font/d36892e5/fonts/pokemon-font.eot');
+	    src: url('https://cdn.rawgit.com/Superpencil/pokemon-font/d36892e5/fonts/pokemon-font.woff');
+	    font-weight: 400;
+    }
 `;
 
 export const AppStyledBackground = styled.div`

@@ -25,7 +25,6 @@ export const fetchPokemonListChunk = (pokemonUrl: string): ThunkAction<Promise<{
     async (dispatch: AppDispatch) => {
         const { next, results }: PokemonResponseData = await fetchListOfPokemons(pokemonUrl);
         dispatch(addPokemonToList(results));
-        //TODO
         return {
             next,
             hasMore: Boolean(next)

@@ -18,6 +18,7 @@ interface GridListProps {
 }
 
 const GridList: React.FC<GridListProps> = ({ loadMore, hasMore, data, Item }) => {
+ 
     return (
         <InfiniteScroll
             pageStart={0}

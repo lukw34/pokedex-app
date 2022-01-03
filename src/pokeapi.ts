@@ -1,3 +1,4 @@
+import { PokeApiPokemonDetails } from './types/pokeApi';
 import { PokemonDetails, PokemonResponseData } from './types/pokemon';
 
 export const getUrl = (endpoint: string): string => `https://pokeapi.co/api/v2/${endpoint}`;
@@ -19,6 +20,7 @@ export const fetchListOfPokemons = (pokemonUrl?: string): Promise<PokemonRespons
 
 export const fetchPokemonDetails = async (pokemonUrl: string): Promise<PokemonDetails> => {
     const {
+        id,
         height,
         weight,
         species: { name },
@@ -28,22 +30,17 @@ export const fetchPokemonDetails = async (pokemonUrl: string): Promise<PokemonDe
         types,
         stats,
         base_experience: baseExperience
-    } = await fetchWrap<any>(fetch(pokemonUrl));
+    } = await fetchWrap<PokeApiPokemonDetails>(fetch(pokemonUrl));
     return {
+        id,
         url: null,
         name,
         image,
         height,
         weight,
-        types: types.map(({ type: { name: typeName } }: { type: { name: string }}) => typeName),
+        types: types.map(({ type: { name: typeName } }) => typeName),
         baseExperience,
-        stats: stats.map(({ base_stat: baseStat, effort, stat: { name } }: {
-            base_stat: number,
-            effort: number,
-            stat: {
-                name: string
-            }
-        }) => ({
+        stats: stats.map(({ base_stat: baseStat, effort, stat: { name } }) => ({
             baseStat,
             effort,
             name

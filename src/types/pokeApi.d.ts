@@ -1,3 +1,5 @@
+import { PokemonStats, PokemonType, PokemonTypes } from './pokemon';
+
 interface PokeApiPokemon {
     name: string,
     url: string
@@ -10,8 +12,48 @@ interface PokeApiPokemonListResponse {
     results: PokeApiPokemon[]
 }
 
+interface PokeApiTypes {
+    slot: number,
+    type: {
+        name: PokemonType
+    }
+}
 
-//TODO
+interface PokeApiStats {
+    base_stat: number,
+    effort: number,
+    stat: {
+        name: string
+    }
+}
+
+interface PokeApiSprites {
+    back_default: string | null,
+    back_shiny_female: string | null,
+    front_default: string,
+    front_shiny: string | null, 
+    front_shiny_female: string | null
+}
+
 interface PokeApiPokemonDetails {
-
+    id: number,
+    name: string,
+    base_experience: number,
+    height: number,
+    is_default: boolean,
+    order: number,
+    weight: number,
+    abilities: unknown[],
+    forms: unknown[],
+    game_indices: unknown[],
+    held_items: unknown[],
+    location_area_encounters: string,
+    moves: unknown[],
+    past_types: unknown[],
+    types: PokeApiTypes[]
+    stats: PokeApiStats[],
+    species: {
+        name: string
+    },
+    sprites: PokeApiSprites
 }

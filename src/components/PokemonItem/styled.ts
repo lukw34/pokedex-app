@@ -1,54 +1,227 @@
 // @ts-ignore
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { PokemonType, PokemonTypes } from '../../types/pokemon';
 
-export const PokemonItemContainer = styled.div`
+const typeColors: {
+    [key in keyof typeof PokemonType]: {
+        light: string,
+        dark :string
+    }
+} = {
+    grass: {
+        light: '#2ECC71',
+        dark: '#239B56'
+    },
+    poison: {
+        light: '#6C3483',
+        dark: '#4A235A'
+    },
+    fire: {
+        light: '#F0B27A',
+        dark: '#E67E22'
+    },
+    water: {
+        dark: '#3498DB',
+        light: '#85C1E9'
+    },
+    normal: {
+        dark: '#B2BABB',
+        light: '#E5E8E8'
+    },
+    fairy: {
+        dark: '#F1948A',
+        light: '#FADBD8'
+    },
+    psychic: {
+        dark: '#FF0000',
+        light: '#E57373 '
+    },
+    dragon: {
+        dark: '#01579B',
+        light: '#1976D2'
+    },
+    fighting: {
+        dark: '#B71C1C',
+        light: '#D32F2F'
+    },
+    bug: {
+        dark: '#28DE00',
+        light: '#77FF59'
+    },
+    ghost: {
+        dark: '#272e69',
+        light: '#3F446E'
+    },
+    electric: {
+       dark: '#d0d007',
+       light: '#E5E555'
+    },
+    ground: {
+        dark: '#873600',
+        light: '#BA4A00'
+    },
+    rock: {
+        dark: '#424242',
+        light:'#707B7C'
+    },
+    flying: {
+        dark: '#325569',
+        light: '#638699'
+    },
+    ice: {
+        dark: '#00CED1',
+        light: '#72D2D3'
+    },
+    dark: {
+        dark: '#000000',
+        light: '#292929'
+    },
+    steel: {
+        dark: '#4a4d59',
+        light: '#74788A'
+    }
+};
+
+export const PokemonItemContainer = styled.div<{displayDetails: boolean}>`
+    height: 300px;
+    width: 300px;
+    margin: 15px;
     display: flex;
-    flex-direction: column;
-    width: 100%;
+    perspective: 1000px;
+    ${ props => props.displayDetails && 'transform: rotateY(180deg)'}
+`;
+
+export const PokemonItemInnerContainer = styled.div<{displayDetails: boolean}>`
     position: relative;
-`;
-
-export const PokemonItemName = styled.div`
-    text-transform: uppercase;
-    background: #676666;
+    width: 100%;
+    height: 100%;
     text-align: center;
-    font-weight: bold;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;`;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    ${props => props.displayDetails && 'transform: rotateY(180deg)'}
+`;
 
-const PokemonItemContent = styled.div`
+const PokeballShape = styled.div`
+    border: black 2px solid;
+    border-radius: 151px;
+    width: 300px;
+    height: 300px;
+    background: #fff;
+    backface-visibility: hidden;
     position: absolute;
-    width: 100%;
-    height: calc(100% - 28px);
-    top: 28px;
+`;
+
+export const PokeballItemContainer = styled(PokeballShape)`
+    &:after {
+        content: " ";
+        background: #000;
+        height: 10px;
+        width: 100%;
+        position: absolute;
+        top: calc(50% - 5px);
+        left: 0;
+    }
+
+    &:before {
+        border-top-left-radius: 187px;
+        border-top-right-radius: 187px;
+        content: " ";
+        background: red;
+        left: 0;
+        height: 50%;
+        width: 100%;
+        position: absolute;
+    }
+`;
+
+const bleepAnimation = keyframes`
+    0% { opacity: 0.8}
+    50% { opacity: 0.2 }
+    100% { opacity: 0.8 }
+`;
+
+export const PokeballCenter = styled.div`
+    width: 70px;
+    height: 70px;
+    border: black 10px solid;
+    top: calc(50% - 45px);
+    right: calc(50% - 45px);
+    background-color: white;
+    position: absolute;
+    border-radius: 45px;
+    z-index: 1;
+
+    &:after {
+        content: " ";
+        background-color: lightgray;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: calc(50% - 20px);
+        right: calc(50% - 20px);
+        border-radius: 20px;
+    }
+
+    &:before {
+        content: " ";
+        background-color: red;
+        width: 20px;
+        height: 20px;
+        opacity: 0.8;
+        position: absolute;
+        top: calc(50% - 10px);
+        right: calc(50% - 10px);
+        border-radius: 10px;
+        z-index: 1;
+        animation-name: ${bleepAnimation};
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+    }
+`;
+
+export const PokemonItemData = styled(PokeballShape)<{ types: PokemonTypes}>`
+    transform: rotateY(180deg);
+    z-index: 5;
     display: flex;
     justify-content: center;
     align-items: center;
-`;
-
-export const PokemonItemNoData = styled(PokemonItemContent)<{ isData?: boolean }>`
-    transition: transform .6s;
-    background: darkgrey;
-    transform-origin: right;
-    transform: scaleX(${props => (props.isData ? 0 : 1)});
-    z-index: 12;
-    font-size: 6rem;
-    color: white;      
-`;
-
-export const PokemonItemData = styled(PokemonItemContent)`
-    z-index: 10;
+    border: 10px solid #DAD33C;
+    border-radius: 170px;
+    background-image: linear-gradient(to bottom right ${({ types }) => types.map(type => `, ${typeColors[type].dark}, ${typeColors[type].light}`)});
     flex-direction: column;
-    width: 100%;
 `;
 
-export const PokemonImage = styled.img`
-    height: 100px;
-    width: 100px;
+export const PokemonImage = styled.img<{pokemonNumber: number}>`
+    height: 150px;
+    width: 150px;
+    &:before {
+        content: '#${({ pokemonNumber }) => pokemonNumber}'
+    }
 `;
+
+export const PokemonIdBadge = styled.div`
+    font-family: "Pokemon GB",monospace;
+    color: white;
+    font-size: 20px;
+    font-weight: 1000;
+    transform: rotateY(180deg);
+`;
+
+export const PokemonDetailsName = styled.div`
+    font-family: "Pokemon GB",monospace;
+    font-weight: 1000;
+    font-size: 15px;
+    transform: rotateY(180deg);
+    background: #dc0a2d;
+    color: white;
+    text-transform: uppercase;
+    padding: 15px;
+    text-align: center;
+    border-radius: 25%;
+    max-width: 100%;
+`;
+
+//////// To refactor
 
 export const PokemonDataStyled = styled.div`
     flex: 1;
@@ -90,37 +263,14 @@ export const PokemonExperienceStyled = styled.div`
     padding: 10px;
 `;
 
-const typeColors: {
-    [key: string]: string
-} = {
-    grass: 'green',
-    poison: 'purple',
-    fire: 'orange',
-    water: 'blue',
-    normal: 'grey',
-    fairy: 'lightcoral',
-    psychic: 'red',
-    dragon: 'dodgerblue',
-    fighting: 'brown',
-    bug: '#28de00',
-    ghost: '#272e69',
-    electric: '#d0d007',
-    ground: '#d06e00',
-    rock: 'darkgrey',
-    flying: '#325569',
-    ice: 'darkturquoise',
-    dark: 'black',
-    steel: '#4a4d59'
-};
-
-    export const PokemonTypesContainer = styled.div`
+export const PokemonTypesContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 `;
 
-export const PokemonTypeStyled = styled.div<{ type: string }>`
+export const PokemonTypeStyled = styled.div<{ type: PokemonType }>`
     padding: 2px 10px;
     font-size: 0.9rem;
     border-radius: 2px 6px;

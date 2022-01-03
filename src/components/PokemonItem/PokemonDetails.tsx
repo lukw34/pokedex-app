@@ -1,16 +1,13 @@
 import React from 'react';
 import { PokemonDetails } from '../../types/pokemon';
-import PokemonTypes from './PokemonTypes';
-import { PokemonDataStyled, PokemonExperienceStyled, PokemonImage, PokemonItemData } from './styled';
+import { PokemonDetailsName, PokemonImage, PokemonItemData, PokemonIdBadge } from './styled';
 
-const PokemonDetailsComp: React.FC<PokemonDetails> = ({ image, name,types, baseExperience }) => {
+const PokemonDetailsComp: React.FC<PokemonDetails> = ({ name, id, image, types = [] }) => {
     return (
-        <PokemonItemData>
-            <PokemonImage src={image}/>
-            <PokemonTypes id={name} types={types}/>
-            <PokemonDataStyled>
-                <PokemonExperienceStyled>{baseExperience}</PokemonExperienceStyled>
-            </PokemonDataStyled>
+        <PokemonItemData types={types}>
+            <PokemonIdBadge>#{id}</PokemonIdBadge>
+            {image && <PokemonImage pokemonNumber={id} src={image}/>}
+            <PokemonDetailsName>{name}</PokemonDetailsName>
         </PokemonItemData>
     );
 };
