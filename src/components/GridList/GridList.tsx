@@ -1,9 +1,10 @@
 import { EntityId } from '@reduxjs/toolkit';
 import React from 'react';
-// @ts-ignore
-import InfiniteScroll from 'react-infinite-scroller';
+import InfiniteLoader from 'react-window-infinite-loader';
+import AutoSizer from 'react-virtualized-auto-sizer';
 
-import { PokemonGridListStyled, GridListItem } from './styled';
+import { FixedSizeGrid } from 'react-window';
+import GridItem from './GridItem';
 
 interface GridListItemComp {
     itemId: EntityId,
@@ -13,29 +14,58 @@ interface GridListItemComp {
 interface GridListProps {
     data: EntityId[],
     Item: React.FC<GridListItemComp>,
-    loadMore: Function,
-    hasMore: boolean
+    loadMore: (startIndex: number, stopIndex: number) => Promise<void>,
+    hasMore: boolean,
+    itemCount: number
 }
 
-const GridList: React.FC<GridListProps> = ({ loadMore, hasMore, data, Item }) => {
- 
+const GridList: React.FC<GridListProps> = ({ loadMore, hasMore, data, itemCount }) => {
+    const isItemLoaded = (index: number) => !hasMore || index < data.length;
     return (
-        <InfiniteScroll
-            pageStart={0}
-            loadMore={loadMore}
-            hasMore={hasMore}
-            threshold={750}
-            useWindow={false}
-            loader={<div className="loader" key={0}>Loading ...</div>}
+        <InfiniteLoader
+            itemCount={itemCount}
+            loadMoreItems={loadMore}
+            isItemLoaded={isItemLoaded}
+            threshold={1}
         >
-            <PokemonGridListStyled>
-            {data.map(( id, index) => (
-                <GridListItem key={`${id}-${index + 1}`}>
-                    <Item itemNumber={index + 1} itemId={id} />
-                </GridListItem>
-            ))}
-            </PokemonGridListStyled>
-        </InfiniteScroll>
+            {({ onItemsRendered, ref }) => (
+                <AutoSizer
+                    style={{
+                        width: '100vw'
+                    }}
+                >
+                        {({ width, height }) => {
+                            const numberOfColumns = Math.floor(width / 400);
+                            return (
+                                <FixedSizeGrid
+                                    ref={ref}
+                                    onItemsRendered={gridProps => {
+                                        onItemsRendered({
+                                        overscanStartIndex:
+                                            gridProps.overscanRowStartIndex * numberOfColumns,
+                                        overscanStopIndex: gridProps.overscanRowStopIndex * numberOfColumns,
+                                        visibleStartIndex: gridProps.visibleRowStartIndex * numberOfColumns,
+                                        visibleStopIndex: gridProps.visibleRowStopIndex * numberOfColumns
+                                        });
+                                    }}
+                                    height={height}
+                                    width={width}
+                                    rowCount={3000}
+                                    rowHeight={400}
+                                    columnWidth={400}
+                                    columnCount={numberOfColumns}
+                                    itemData={{
+                                        numberOfColumns,
+                                        list: data
+                                    }}
+                                >
+                                    {GridItem}
+                                </FixedSizeGrid>
+                        );
+                    }}
+                    </AutoSizer>
+                )}
+        </InfiniteLoader>
     );
 };
 

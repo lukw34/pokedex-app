@@ -9,9 +9,7 @@ export const PokemonGridListStyled = styled.div`
 `;
 
 export const GridListItem = styled.div`
-    flex: 0 0 400px;
     display: flex;
-    flex-direction: row;
+    align-items: center;
     justify-content: center;
-    margin: 20px;
 `;

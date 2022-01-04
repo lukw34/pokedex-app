@@ -9,10 +9,13 @@ const pokedexAdapter = createEntityAdapter<PokemonDetails>({
 
 const pokedexSlice = createSlice({
     name: 'pokedex',
-    initialState: pokedexAdapter.getInitialState(),
+    initialState: pokedexAdapter.getInitialState({
+        count: 0
+    }),
     reducers:  {
         addPokemonToList: (state, action) => {
-            pokedexAdapter.addMany(state, action.payload);
+            state.count = action.payload.count;
+            pokedexAdapter.addMany(state, action.payload.results);
         },
         setPokemonDetails: (state, action) => {
             pokedexAdapter.upsertOne(state, action.payload);
@@ -23,8 +26,8 @@ const pokedexSlice = createSlice({
 
 export const fetchPokemonListChunk = (pokemonUrl: string): ThunkAction<Promise<{ next: string, hasMore: boolean}>, AppState, null, Action<string>> => 
     async (dispatch: AppDispatch) => {
-        const { next, results }: PokemonResponseData = await fetchListOfPokemons(pokemonUrl);
-        dispatch(addPokemonToList(results));
+        const { next, results, count }: PokemonResponseData = await fetchListOfPokemons(pokemonUrl);
+        dispatch(addPokemonToList({ results, count }));
         return {
             next,
             hasMore: Boolean(next)
@@ -39,5 +42,7 @@ export const fetchSinglePokemon = (pokemonUrl: string): ThunkAction<void, AppSta
 export const { addPokemonToList, setPokemonDetails } = pokedexSlice.actions;
 
 export const { selectIds: selectPokemonList, selectById: selectPokemonDetails } = pokedexAdapter.getSelectors((state: AppState) => state.pokedex);
+
+export const selectPokemonCount = (state: AppState) => state.pokedex.count;
 
 export default pokedexSlice.reducer;

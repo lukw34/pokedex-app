@@ -10,14 +10,12 @@ import {
     AppStyledContent,
     GlobalStyled
 } from './styled';
-import Menu from '../Menu/Menu';
 import AppHeader from '../AppHeader/AppHeader';
 
 const App: React.FC = () => {
     return (
         <AppStyled>
             <GlobalStyled />
-            <Menu/>
             <AppHeader/>
             <AppStyledBackground />
             <AppStyledContent>

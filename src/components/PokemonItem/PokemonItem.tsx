@@ -9,32 +9,40 @@ import { PokemonItemContainer, PokemonItemInnerContainer } from './styled';
 import PokemonDetailsComp from './PokemonDetails';
 
 interface PokemonItemProps {
-    itemId: EntityId,
+    itemId: EntityId | undefined,
     itemNumber: number
 }
 
-const PokemonItem: React.FC<PokemonItemProps> = ({ itemId, itemNumber }) => {
+const PokemonItem: React.FC<PokemonItemProps> = ({ itemId = '', itemNumber }) => {
     const [displayDetails, setDisplayDetails] = useState(false);
     const dispatch = useDispatch();
-    const pokemonDetails = useSelector((state: AppState) => selectPokemonDetails(state, itemId) as PokemonDetails);
+    const { url, ...props } = useSelector((state: AppState) => selectPokemonDetails(state, itemId) as PokemonDetails) || {};
     
     useEffect(() => {
-        const isData = !pokemonDetails.url;
-        if(!isData) {
-            dispatch(fetchSinglePokemon(pokemonDetails.url as string));
-        } else {
-            setTimeout(() => {
+        const isData = url === null;
+        const itemNotFetched = url === undefined;
+        let timeoutId: NodeJS.Timeout | null = null;
+        if(!isData && !itemNotFetched) {
+            dispatch(fetchSinglePokemon(url as string));
+        } else if (!itemNotFetched) {
+            timeoutId = setTimeout(() => {
                 setDisplayDetails(true);
             }, 500);
         }
 
-    }, [pokemonDetails.url]);
+        return () => {
+            if(timeoutId) {
+                clearTimeout(timeoutId);
+            }
+        };
+
+    }, [url]);
 
     return (
         <PokemonItemContainer displayDetails={displayDetails}>
             <PokemonItemInnerContainer displayDetails={displayDetails}>
                 <PokemonNoItem/>
-                <PokemonDetailsComp {...pokemonDetails} />
+                <PokemonDetailsComp {...props} url={url} />
             </PokemonItemInnerContainer>
         </PokemonItemContainer>
     );
