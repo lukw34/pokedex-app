@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import GridList from '../components/GridList/GridList';
@@ -16,6 +16,10 @@ const Pokedex: React.FC = () => {
         const result = await dispatch(fetchPokemonListChunk(url)) as any;
         setConfig({ url: result.next, hasMore: result.hasMore });
     };
+
+    useEffect(() => {
+        loadMore();
+    }, []);
 
     return (
         <GridList Item={PokemonItem} loadMore={loadMore} data={list} hasMore={hasMore} itemCount={itemCount}/>

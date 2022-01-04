@@ -4,7 +4,7 @@ import { AppState, AppDispatch } from '../store';
 import { PokemonDetails, PokemonResponseData } from '../types/pokemon';
 
 const pokedexAdapter = createEntityAdapter<PokemonDetails>({
-    selectId: ({ name }) => name
+    selectId: ({ name }) => name,
 });
 
 const pokedexSlice = createSlice({
