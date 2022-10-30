@@ -8,78 +8,78 @@ const typeColors: {
         dark :string
     }
 } = {
-    grass: {
-        light: '#2ECC71',
-        dark: '#239B56'
-    },
-    poison: {
-        light: '#6C3483',
-        dark: '#4A235A'
-    },
-    fire: {
-        light: '#F0B27A',
-        dark: '#E67E22'
-    },
-    water: {
-        dark: '#3498DB',
-        light: '#85C1E9'
-    },
-    normal: {
-        dark: '#B2BABB',
-        light: '#E5E8E8'
-    },
-    fairy: {
-        dark: '#F1948A',
-        light: '#FADBD8'
-    },
-    psychic: {
-        dark: '#FF0000',
-        light: '#E57373 '
-    },
-    dragon: {
-        dark: '#01579B',
-        light: '#1976D2'
-    },
-    fighting: {
-        dark: '#B71C1C',
-        light: '#D32F2F'
-    },
-    bug: {
-        dark: '#28DE00',
-        light: '#77FF59'
-    },
-    ghost: {
-        dark: '#272e69',
-        light: '#3F446E'
-    },
-    electric: {
-       dark: '#d0d007',
-       light: '#E5E555'
-    },
-    ground: {
-        dark: '#873600',
-        light: '#BA4A00'
-    },
-    rock: {
-        dark: '#424242',
-        light:'#707B7C'
-    },
-    flying: {
-        dark: '#325569',
-        light: '#638699'
-    },
-    ice: {
-        dark: '#00CED1',
-        light: '#72D2D3'
-    },
-    dark: {
-        dark: '#000000',
-        light: '#292929'
-    },
-    steel: {
-        dark: '#4a4d59',
-        light: '#74788A'
-    }
+  grass: {
+    light: '#2ECC71',
+    dark: '#239B56'
+  },
+  poison: {
+    light: '#6C3483',
+    dark: '#4A235A'
+  },
+  fire: {
+    light: '#F0B27A',
+    dark: '#E67E22'
+  },
+  water: {
+    dark: '#3498DB',
+    light: '#85C1E9'
+  },
+  normal: {
+    dark: '#B2BABB',
+    light: '#E5E8E8'
+  },
+  fairy: {
+    dark: '#F1948A',
+    light: '#FADBD8'
+  },
+  psychic: {
+    dark: '#FF0000',
+    light: '#E57373 '
+  },
+  dragon: {
+    dark: '#01579B',
+    light: '#1976D2'
+  },
+  fighting: {
+    dark: '#B71C1C',
+    light: '#D32F2F'
+  },
+  bug: {
+    dark: '#28DE00',
+    light: '#77FF59'
+  },
+  ghost: {
+    dark: '#272e69',
+    light: '#3F446E'
+  },
+  electric: {
+    dark: '#d0d007',
+    light: '#E5E555'
+  },
+  ground: {
+    dark: '#873600',
+    light: '#BA4A00'
+  },
+  rock: {
+    dark: '#424242',
+    light:'#707B7C'
+  },
+  flying: {
+    dark: '#325569',
+    light: '#638699'
+  },
+  ice: {
+    dark: '#00CED1',
+    light: '#72D2D3'
+  },
+  dark: {
+    dark: '#000000',
+    light: '#292929'
+  },
+  steel: {
+    dark: '#4a4d59',
+    light: '#74788A'
+  }
 };
 
 export const PokemonItemContainer = styled.div<{displayDetails: boolean}>`

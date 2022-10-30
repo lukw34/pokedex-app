@@ -1,51 +1,49 @@
 import React, { useEffect, useState } from 'react';
-import { PokemonDetails } from '../../types/pokemon';
-import { EntityId } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSinglePokemon, selectPokemonDetails } from '../../slices/pokedex.slice';
-import { AppState } from '../../store';
+import { AppDispatch, AppState } from '../../store';
 import PokemonNoItem from './PokemonNoItem';
 import { PokemonItemContainer, PokemonItemInnerContainer } from './styled';
 import PokemonDetailsComp from './PokemonDetails';
 
 interface PokemonItemProps {
-    itemId: EntityId | undefined,
-    itemNumber: number
+    pokedexNumber: number
+    isLoaded: number
 }
 
-const PokemonItem: React.FC<PokemonItemProps> = ({ itemId = '', itemNumber }) => {
-    const [displayDetails, setDisplayDetails] = useState(false);
-    const dispatch = useDispatch();
-    const { url, ...props } = useSelector((state: AppState) => selectPokemonDetails(state, itemId) as PokemonDetails) || {};
-    
-    useEffect(() => {
-        const isData = url === null;
-        const itemNotFetched = url === undefined;
-        let timeoutId: NodeJS.Timeout | null = null;
-        if(!isData && !itemNotFetched) {
-            dispatch(fetchSinglePokemon(url as string));
-        } else if (!itemNotFetched) {
-            timeoutId = setTimeout(() => {
-                setDisplayDetails(true);
-            }, 500);
-        }
+const PokemonItem: React.FC<PokemonItemProps> = ({ pokedexNumber, isLoaded }) => {
+  const [displayDetails, setDisplayDetails] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const pokemonDetails = useSelector((state: AppState) => selectPokemonDetails(state, pokedexNumber));
 
-        return () => {
-            if(timeoutId) {
-                clearTimeout(timeoutId);
-            }
-        };
+  useEffect(() => {
 
-    }, [url]);
+    let timeoutId: NodeJS.Timeout | null = null;
 
-    return (
-        <PokemonItemContainer displayDetails={displayDetails}>
-            <PokemonItemInnerContainer displayDetails={displayDetails}>
-                <PokemonNoItem/>
-                <PokemonDetailsComp {...props} url={url} />
-            </PokemonItemInnerContainer>
-        </PokemonItemContainer>
-    );
+    if(!isLoaded) {
+      dispatch(fetchSinglePokemon(pokedexNumber));
+    } else {
+      timeoutId = setTimeout(() => {
+        setDisplayDetails(true);
+      }, 500);
+    }
+
+    return () => {
+      if(timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+
+  }, [isLoaded, dispatch, pokedexNumber]);
+
+  return (
+    <PokemonItemContainer displayDetails={displayDetails}>
+      <PokemonItemInnerContainer displayDetails={displayDetails}>
+        <PokemonNoItem/>
+        {pokemonDetails?.isLoaded && <PokemonDetailsComp {...pokemonDetails} />}
+      </PokemonItemInnerContainer>
+    </PokemonItemContainer>
+  );
 };
     
 

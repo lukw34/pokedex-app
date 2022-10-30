@@ -37,17 +37,26 @@ enum PokemonType {
 type PokemonStats = Array<PokemonStat>
 type PokemonTypes = Array<PokemonType>
 
-export interface PokemonDetails {
+export interface LoadedPokemonDetails {
+    pokedexNumber: number,
+    isLoaded: true,
     id: number,
     name: string,
     url: string | null,
-    weight?: number,
-    height?: number,
-    image?: string,
-    types?: PokemonTypes,
-    stats?: PokemonStats
-    baseExperience?: number
+    weight: number,
+    height: number,
+    image: string,
+    types: PokemonTypes,
+    stats: PokemonStats
+    baseExperience: number
 }
+
+export interface NotLoadedPokemonDetails {
+    pokedexNumber: number,
+    isLoaded: false,
+}
+
+export type PokemonDetails = LoadedPokemonDetails | NotLoadedPokemonDetails
 
 export interface PokemonListItem {
     name: string,

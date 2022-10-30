@@ -1,4 +1,9 @@
-import { PokemonStats, PokemonType, PokemonTypes } from './pokemon';
+import { PokemonType } from './pokemon';
+
+interface PokeApiQuery {
+    limit: number,
+    offset: number
+}
 
 interface PokeApiPokemon {
     name: string,

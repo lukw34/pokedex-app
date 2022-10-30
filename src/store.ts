@@ -8,9 +8,9 @@ export type AppState = {
 }
 
 export const store = configureStore({
-    reducer: {
-        pokedex,
-    }
+  reducer: {
+    pokedex,
+  }
 });
 
 export type RootState = ReturnType<typeof store.getState>

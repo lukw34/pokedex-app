@@ -54,7 +54,9 @@
       ],
       "no-multi-spaces": [
         "error"
-      ]
+      ],
+      "indent": ["error", 2],
+      "react/jsx-indent": ["error", 2]
     }
   },
   "browserslist": {
