@@ -22,7 +22,7 @@ const App: React.FC = () => {
         <Routes>
           <Route element={<Pokedex />} path="/pokemon" />
           <Route element={<PokemonSearch />} path="/pokemon/search" />
-          <Route element={<Navigate to={'/pokemon'}/>} path="*" />
+          <Route element={<Navigate to={'/pokemon'}/>} path="/:pokedexNumber" />
         </Routes>
       </AppStyledContent>
     </AppStyled>

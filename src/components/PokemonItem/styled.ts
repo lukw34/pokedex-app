@@ -83,6 +83,7 @@ const typeColors: {
 };
 
 export const PokemonItemContainer = styled.div<{displayDetails: boolean}>`
+    cursor: pointer;
     height: 300px;
     width: 300px;
     margin: 15px;
@@ -185,7 +186,8 @@ export const PokemonItemData = styled(PokeballShape)<{ types: PokemonTypes}>`
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 10px solid #b9b5b5;
+    box-shadow: inset 0 4px 6px rgb(0 0 0 / 25%), 0 4px 6px rgb(0 0 0 / 61%);
+    border: none;
     border-radius: 170px;
     background-image: linear-gradient(to bottom right ${({ types }) => types.map(type => `, ${typeColors[type].dark}, ${typeColors[type].light}`)});
     flex-direction: column;
@@ -211,16 +213,17 @@ export const PokemonIdBadge = styled.div`
 export const PokemonDetailsName = styled.div`
     font-family: "Pokemon GB",monospace;
     font-weight: 1000;
-    font-size: 15px;
+    font-size: 20px;
     transform: rotateY(180deg);
     color: black;
     text-transform: uppercase;
     padding: 15px;
     text-align: center;
     max-width: 100%;
+    text-shadow: 2px 0px #ffffff;
+    letter-spacing: 5px;
 `;
 
-//////// To refactor
 
 export const PokemonDataStyled = styled.div`
     flex: 1;
